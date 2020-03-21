@@ -8,15 +8,15 @@ To run this project, please make sure you have Docker installed. After, follow t
 1. Get into project root repository.
 1. Download data (you need to have [Kaggle API](https://github.com/Kaggle/kaggle-api) installed). Don't for get to accept the [rules](https://www.kaggle.com/c/ieee-fraud-detection/rules) of competition.
     ```
-    ./download_data.sh
+    ./scripts/download_data.sh
     ```
 1. Build docker image:
     ```
-    ./build.sh
+    ./scripts/build.sh
     ```
 1. Run docker container using command: 
     ```
-    ./run.sh
+    ./scripts/run.sh
     ```
 1. Run initial dataset processing:
     1. Get into docker container:
