@@ -39,3 +39,7 @@ def load_data():
         dtype[f'addr{a}'] = np.object
 
     return pd.read_csv('../data/dataset.csv', dtype=dtype)
+
+
+def load_processed_data():
+    return pd.read_csv('../data/dataset_processed.csv')
