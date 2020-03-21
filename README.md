@@ -1,6 +1,6 @@
 # Transactions Fraud Detection
 
-**Authors:** Peter Macinec, Timotej Zatko
+**Authors:** [Peter Macinec](https://github.com/pmacinec), [Timotej Zatko](https://github.com/timzatko)
 
 ## Installation and running
 
