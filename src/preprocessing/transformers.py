@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 from sklearn.base import BaseEstimator, TransformerMixin
 
@@ -49,3 +50,22 @@ class KeepOnlyMostCommonValues(BaseEstimator, TransformerMixin):
             x.loc[~x[column].isin(most_common), column] = 'Other'
 
         return x[columns]
+
+
+class EmailProviderTransform(TransformerMixin, BaseEstimator):
+    def __init__(self, columns):
+        self.columns = columns
+
+    def fit(self, x, y=None):
+        return self
+
+    def transform(self, x, y=None, copy=None):
+        def transform_email(val):
+            if val is np.nan:
+                return val
+            return val.split('.')[0]
+
+        for column in self.columns:
+            x[column] = x[column].astype('str').apply(transform_email).astype('str')
+
+        return x
