@@ -5,6 +5,11 @@ from sklearn.model_selection import train_test_split
 
 
 def load_data():
+    """
+    Load data with custom types.
+
+    :return: loaded dataframe.
+    """
     dtype = {}
 
     for col in ['TransactionID', 'TransactionDT']:
@@ -28,7 +33,8 @@ def load_data():
     for c in range(1, 14):
         dtype[f'C{c}'] = np.float16
 
-    for i in ['id_01', 'id_02', 'id_03', 'id_04', 'id_05', 'id_06', 'id_07', 'id_08', 'id_09', 'id_10', 'id_11']:
+    for i in ['id_01', 'id_02', 'id_03', 'id_04', 'id_05', 'id_06',
+              'id_07', 'id_08', 'id_09', 'id_10', 'id_11']:
         dtype[f'id_{i}'] = np.float32
 
     for c in range(1, 6):
@@ -43,13 +49,22 @@ def load_data():
     return pd.read_csv('../data/dataset.csv', dtype=dtype)
 
 
-def save_and_split_processed_data(new_df_transactions, **kwargs):
-    print('splitting the data...')
+def split_and_save_processed_data(new_df_transactions, **kwargs):
+    """
+    Split and store dataframe into train-test dataframes.
+
+    :param new_df_transactions: dataframe to be splitted.
+    :param kwargs: additional arguments:
+        test_size (float): test data ratio (default 0.2).
+    """
+    print('Splitting the data...')
     x = new_df_transactions.drop('isFraud', axis=1)
     y = new_df_transactions[['isFraud']]
-    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=kwargs.get('test_size', 0.2), random_state=42)
+    x_train, x_test, y_train, y_test = train_test_split(
+        x, y, test_size=kwargs.get('test_size', 0.2), random_state=42
+    )
 
-    print('saving...')
+    print('Saving data...')
     x_train.to_csv('../data/x_train.csv', index=False)
     y_train.to_csv('../data/y_train.csv', index=False)
     x_test.to_csv('../data/x_test.csv', index=False)
@@ -57,9 +72,17 @@ def save_and_split_processed_data(new_df_transactions, **kwargs):
 
 
 def load_processed_data():
+    """
+    Load preprocessed train-test splitted data.
+
+    :return: x_train, y_train, x_test, y_test data.
+    """
     x_train = pd.read_csv('../data/x_train.csv')
     y_train = pd.read_csv('../data/y_train.csv')
     x_test = pd.read_csv('../data/x_test.csv')
     y_test = pd.read_csv('../data/y_test.csv')
 
-    return x_train, y_train['isFraud'].tolist(), x_test, y_test['isFraud'].tolist()
+    y_train = y_train['isFraud'].tolist()
+    y_test = y_test['isFraud'].tolist()
+
+    return x_train, y_train, x_test, y_test
