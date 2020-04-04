@@ -87,12 +87,21 @@ def load_processed_data(**kwargs):
     frac = kwargs.get('frac', 1)
     
     if frac < 1:
-        x_train.sample(frac=frac, replace=True, random_state=420)
-        y_train.sample(frac=frac, replace=True, random_state=420)
-        x_test.sample(frac=frac, replace=True, random_state=420)
-        y_test.sample(frac=frac, replace=True, random_state=420)        
+        n_train = int(len(x_train) * frac)
+        n_test = int(len(x_test) * frac)
+        
+        x_train = x_train.sample(n=n_train, replace=False, random_state=420)
+        y_train = y_train.sample(n=n_train, replace=False, random_state=420)
+        x_test = x_test.sample(n=n_test, replace=False, random_state=420)
+        y_test = y_test.sample(n=n_test, replace=False, random_state=420)        
 
     y_train = y_train['isFraud'].tolist()
     y_test = y_test['isFraud'].tolist()
+    
+    print(f'Number of records:')
+    print(f'  x_train - {len(x_train)}')
+    print(f'  y_train - {len(y_train)}')
+    print(f'  x_test - {len(x_test)}')
+    print(f'  y_test - {len(y_test)}')
 
     return x_train, y_train, x_test, y_test
