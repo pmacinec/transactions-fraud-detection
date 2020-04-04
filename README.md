@@ -2,6 +2,11 @@
 
 **Authors:** [Peter Macinec](https://github.com/pmacinec), [Timotej Zatko](https://github.com/timzatko)
 
+## Prerequisites
+
+- [Docker](https://www.docker.com/)
+- [GIT LFS](https://git-lfs.github.com/)
+
 ## Installation and running
 
 To run this project, please make sure you have Docker installed. After, follow the steps:
