@@ -71,9 +71,11 @@ def split_and_save_processed_data(new_df_transactions, **kwargs):
     y_test.to_csv('../data/y_test.csv', index=False)
 
 
-def load_processed_data():
+def load_processed_data(**kwargs):
     """
     Load preprocessed train-test splitted data.
+
+    :param frac: fraction of axis items to return.
 
     :return: x_train, y_train, x_test, y_test data.
     """
@@ -81,6 +83,14 @@ def load_processed_data():
     y_train = pd.read_csv('../data/y_train.csv')
     x_test = pd.read_csv('../data/x_test.csv')
     y_test = pd.read_csv('../data/y_test.csv')
+    
+    frac = kwargs.get('frac', 1)
+    
+    if frac < 1:
+        x_train.sample(frac=frac, replace=True, random_state=420)
+        y_train.sample(frac=frac, replace=True, random_state=420)
+        x_test.sample(frac=frac, replace=True, random_state=420)
+        y_test.sample(frac=frac, replace=True, random_state=420)        
 
     y_train = y_train['isFraud'].tolist()
     y_test = y_test['isFraud'].tolist()
