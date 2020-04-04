@@ -4,6 +4,8 @@ from sklearn.impute import SimpleImputer
 
 
 class PandasSimpleImputer(SimpleImputer):
+    """Simple imputer transformer for pandas."""
+    
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 

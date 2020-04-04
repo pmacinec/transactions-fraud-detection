@@ -61,6 +61,8 @@ class MergeSmallCategories(TransformerMixin):
 
     def fit(self, df, y=None):
         for col in df.columns:
+            if '_missing' in col:
+                continue
             values = df[col].value_counts(normalize=True)
             for name, value in values.iteritems():
                 if value < self.threshold:
@@ -69,6 +71,8 @@ class MergeSmallCategories(TransformerMixin):
 
     def transform(self, df, **transform_params):
         for col in df.columns:
+            if '_missing' in col:
+                continue
             df[col] = df[col].apply(
                 lambda x: self.get_value(x)
             )

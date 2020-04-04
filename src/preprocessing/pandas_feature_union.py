@@ -9,6 +9,8 @@ from scipy import sparse
 
 
 class PandasFeatureUnion(FeatureUnion):
+    """Feature union transformer for pandas."""
+
     def fit_transform(self, X, y=None, **fit_params):
         self._validate_transformers()
         result = Parallel(n_jobs=self.n_jobs)(

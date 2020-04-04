@@ -4,10 +4,11 @@ from sklearn.base import BaseEstimator, TransformerMixin
 
 
 class PandasOneHotEncoder(BaseEstimator, TransformerMixin):
-    def fit(self, x, y=None):
+    def fit(self, df, y=None):
         return self
 
-    def transform(self, x):
-        assert isinstance(x, pd.DataFrame)
+    def transform(self, df):
+        assert isinstance(df, pd.DataFrame)
 
-        return pd.get_dummies(x, dummy_na=True, drop_first=True)
+        columns = list(filter(lambda x: '_missing' not in x, df.columns))
+        return pd.get_dummies(df, columns=columns)

@@ -5,10 +5,12 @@ from sklearn.impute import MissingIndicator
 
 
 class PandasMissingIndicator(MissingIndicator):
+    """Missing indicator transformer for pandas."""
+
     def __init__(self, **kwargs):
         super().__init__(features='all', **kwargs)
 
-        self._suffix = kwargs.get('suffix', ' missing')
+        self._suffix = kwargs.get('suffix', '_missing')
 
     def fit(self, x, y=None):
         super().fit(x, y)
