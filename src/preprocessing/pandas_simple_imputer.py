@@ -21,6 +21,8 @@ class PandasSimpleImputer(SimpleImputer):
         matrix = super().transform(x)
 
         for index, col in enumerate(x.columns):
+            if '_missing' in col:
+                continue
             x.loc[:, col] = matrix[:, index]
 
         return x

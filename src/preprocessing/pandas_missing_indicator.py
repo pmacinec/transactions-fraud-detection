@@ -31,6 +31,6 @@ class PandasMissingIndicator(MissingIndicator):
             if np.any(row == True):
                 x.loc[:, col_name] = row
 
-                x[col_name] = x[col_name].astype(np.bool)
+                x[col_name] = x[col_name].astype(int)
 
         return x
