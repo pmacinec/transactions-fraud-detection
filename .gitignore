@@ -6,3 +6,10 @@ __pycache__/
 data
 ieee-fraud-detection.zip
 .DS_Store
+
+# LaTex
+*.log
+*.aux
+*.out
+*.gz
+*.fdb_latexmk
