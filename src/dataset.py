@@ -24,26 +24,26 @@ def load_data():
     for col in ['isFraud']:
         dtype[col] = np.bool
 
-    for v in range(1, 339):
+    for v in range(1, 340):
         dtype[f'V{v}'] = np.float32
 
-    for d in range(1, 15):
+    for d in range(1, 16):
         dtype[f'D{d}'] = np.float16
 
-    for c in range(1, 14):
+    for c in range(1, 15):
         dtype[f'C{c}'] = np.float16
 
     for i in ['id_01', 'id_02', 'id_03', 'id_04', 'id_05', 'id_06',
               'id_07', 'id_08', 'id_09', 'id_10', 'id_11']:
-        dtype[f'id_{i}'] = np.float32
+        dtype[i] = np.float32
 
-    for c in range(1, 6):
+    for c in range(1, 7):
         dtype[f'card{c}'] = np.object
 
-    for i in range(12, 38):
+    for i in range(12, 39):
         dtype[f'id_{i}'] = np.object
 
-    for a in range(1, 2):
+    for a in range(1, 3):
         dtype[f'addr{a}'] = np.object
 
     return pd.read_csv('../data/dataset.csv', dtype=dtype)
