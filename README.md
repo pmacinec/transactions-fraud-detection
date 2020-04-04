@@ -11,6 +11,10 @@
 
 To run this project, please make sure you have Docker installed. After, follow the steps:
 1. Get into project root repository.
+1. Setup repository using command:
+    ```
+    sh ./scripts/setup.sh
+    ```
 1. Download data (you need to have [Kaggle API](https://github.com/Kaggle/kaggle-api) installed). Don't for get to accept the [rules](https://www.kaggle.com/c/ieee-fraud-detection/rules) of competition.
     ```
     ./scripts/download_data.sh
