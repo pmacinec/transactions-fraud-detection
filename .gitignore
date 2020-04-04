@@ -5,3 +5,4 @@ __pycache__/
 .env
 data
 ieee-fraud-detection.zip
+.DS_Store
