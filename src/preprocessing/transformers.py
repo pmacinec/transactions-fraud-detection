@@ -2,35 +2,46 @@ import pandas as pd
 import numpy as np
 
 from sklearn.base import BaseEstimator, TransformerMixin
-from sklearn.preprocessing import normalize
 
 
 class SelectFeatures(BaseEstimator, TransformerMixin):
+    """
+    Select subset of features from dataframe.
+    
+    :param columns: columns to choose from dataframe.
+    """
+
     def __init__(self, columns):
         self.columns = columns
 
     def fit(self, x, y=None):
         return self
 
-    def transform(self, x):
-        assert isinstance(x, pd.DataFrame)
+    def transform(self, df):
+        assert isinstance(df, pd.DataFrame)
 
-        return x[self.columns]
+        return df[self.columns]
 
 
 class FilterColumnsByCountOfMissingValues(BaseEstimator, TransformerMixin):
+    """
+    Filter columns by count of missing values.
+    
+    :param threshold: threshold ratio of missing values in column.
+    """
+
     def __init__(self, threshold, **kwargs):
         self.threshold = threshold
 
     def fit(self, x, y=None):
         return self
 
-    def transform(self, x):
-        assert isinstance(x, pd.DataFrame)
+    def transform(self, df):
+        assert isinstance(df, pd.DataFrame)
 
-        columns_to_drop = x.columns[1 - x.isnull().mean() < self.threshold].tolist()
+        to_drop = df.columns[1 - df.isnull().mean() < self.threshold].tolist()
 
-        return x.drop(columns=columns_to_drop)
+        return df.drop(columns=to_drop)
 
 
 class KeepOnlyMostCommonValues(BaseEstimator, TransformerMixin):
@@ -54,13 +65,19 @@ class KeepOnlyMostCommonValues(BaseEstimator, TransformerMixin):
 
 
 class EmailProviderTransform(TransformerMixin, BaseEstimator):
+    """
+    Transform email addresses into domains only.
+
+    :param columns: columns containing email addresses.
+    """
+
     def __init__(self, columns):
         self.columns = columns
 
     def fit(self, x, y=None):
         return self
 
-    def transform(self, x, y=None, copy=None):
+    def transform(self, df, y=None, copy=None):
         def transform_email(value):
             """
             Transform email domains into domain names only.
@@ -77,41 +94,17 @@ class EmailProviderTransform(TransformerMixin, BaseEstimator):
             return value.split('.')[0]
 
         for col in self.columns:
-            x[col] = x[col].astype('str').apply(transform_email).astype('str')
+            df[col] = df[col].astype('str').apply(transform_email).astype('str')
 
-        return x
+        return df
 
 
 class Normalizer(TransformerMixin):
     """Normalize numerical attributes of dataframe."""
 
-    def fit(self, X, y=None):
+    def fit(self, df, y=None):
         return self
 
     def transform(self, df):
         df = (df - df.mean()) / df.std()
-        return df
-
-
-class OutliersFilter(TransformerMixin):
-    """Remove outliers using quartiles."""
-
-    def __init__(self):
-        self.Q1 = {}
-        self.Q3 = {}
-
-    def fit(self, df, y=None, **fit_params):
-        for col in df.columns:
-            self.Q1[col] = df[col].quantile(.25)
-            self.Q3[col] = df[col].quantile(.75)
-        return self
-
-    def transform(self, df, **transform_params):
-        for col in df.columns:
-            Q1 = self.Q1[col]
-            Q3 = self.Q3[col]
-            lower_outlier = Q1 - (Q3 - Q1) * 1.5
-            upper_outlier = Q3 + (Q3 - Q1) * 1.5
-
-            df = df[(df[col] >= lower_outlier) & (df[col] <= upper_outlier)]
         return df
