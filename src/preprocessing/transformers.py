@@ -128,9 +128,21 @@ class EmailProviderTransform(TransformerMixin, BaseEstimator):
 class Normalizer(TransformerMixin):
     """Normalize numerical attributes of dataframe."""
 
+    def __init__(self):
+        self.means = {}
+        self.stds = {}
+
     def fit(self, df, y=None):
+        for col in df.columns:
+            if '_missing' in col:
+                continue
+            self.means[col] = df[col].astype(float).mean()
+            self.stds[col] = df[col].astype(float).std()
         return self
 
     def transform(self, df):
-        df = (df - df.mean()) / df.std()
+        for col in df.columns:
+            if '_missing' in col:
+                continue
+            df[col] = (df[col] - self.means[col]) / self.stds[col]
         return df
