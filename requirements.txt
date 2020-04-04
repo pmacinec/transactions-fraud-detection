@@ -1,2 +1,2 @@
 missingno
-NiaPy==2.0.0rc5
+NiaPy==2.0.0rc10
