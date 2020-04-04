@@ -49,17 +49,17 @@ def load_data():
     return pd.read_csv('../data/dataset.csv', dtype=dtype)
 
 
-def split_and_save_processed_data(new_df_transactions, **kwargs):
+def split_and_save_processed_data(df, **kwargs):
     """
     Split and store dataframe into train-test dataframes.
 
-    :param new_df_transactions: dataframe to be splitted.
+    :param df: dataframe to be splitted.
     :param kwargs: additional arguments:
         test_size (float): test data ratio (default 0.2).
     """
     print('Splitting the data...')
-    x = new_df_transactions.drop('isFraud', axis=1)
-    y = new_df_transactions[['isFraud']]
+    x = df.drop('isFraud', axis=1)
+    y = df[['isFraud']]
     x_train, x_test, y_train, y_test = train_test_split(
         x, y, test_size=kwargs.get('test_size', 0.2), random_state=42
     )
