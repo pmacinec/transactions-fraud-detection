@@ -44,24 +44,48 @@ class FilterColumnsByCountOfMissingValues(BaseEstimator, TransformerMixin):
         return df.drop(columns=to_drop)
 
 
-class KeepOnlyMostCommonValues(BaseEstimator, TransformerMixin):
-    def __init__(self, n, **kwargs):
-        self.n = n
-        self.columns = kwargs.get('columns', None)
+class MergeSmallCategories(TransformerMixin):
+    """
+    Merge too small classes in categorical attribute into 'other' class.
 
-    def fit(self, x, y=None):
+    Taken from other author's project:
+    https://github.com/pmacinec/diabetes-patients-readmissions-prediction/
+
+    :param threshold: threshold of percentage frequency under which 
+        classes will be merged into 'other' class.
+    """
+
+    def __init__(self, threshold=0.05, **kwargs):
+        self.threshold = threshold
+        self.mapping = {}
+
+    def fit(self, df, y=None):
+        for col in df.columns:
+            values = df[col].value_counts(normalize=True)
+            for name, value in values.iteritems():
+                if value < self.threshold:
+                    self.mapping[name] = 'other'
         return self
 
-    def transform(self, x):
-        assert isinstance(x, pd.DataFrame)
+    def transform(self, df, **transform_params):
+        for col in df.columns:
+            df[col] = df[col].apply(
+                lambda x: self.get_value(x)
+            )
+        return df
 
-        columns = self.columns if self.columns is not None else x.columns
+    def get_value(self, value):
+        """
+        Get value from mapping with handling special cases.
 
-        for column in columns:
-            most_common = x[column].value_counts().nlargest(n=self.n).index.tolist()
-            x.loc[~x[column].isin(most_common), column] = 'Other'
-
-        return x[columns]
+        :param value: value to be found in mapping.
+        :return: mapped value or None, if value is unknown or NaN.
+        """
+        if pd.isna(value):
+            return None
+        if value not in self.mapping.keys():
+            return value
+        return self.mapping[value]
 
 
 class EmailProviderTransform(TransformerMixin, BaseEstimator):
