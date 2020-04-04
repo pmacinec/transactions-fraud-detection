@@ -118,6 +118,8 @@ class EmailProviderTransform(TransformerMixin, BaseEstimator):
             return value.split('.')[0]
 
         for col in self.columns:
+            if col not in df.columns:
+                continue
             df[col] = df[col].astype('str').apply(transform_email).astype('str')
 
         return df
