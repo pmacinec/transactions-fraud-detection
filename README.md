@@ -41,3 +41,8 @@ To run this project, please make sure you have Docker installed. After, follow t
 ## Dataset
 
 To solve our problem of transactions fraud detection, we are using the data from [IEEE-CIS Fraud Detection](https://www.kaggle.com/c/ieee-fraud-detection/overview) competition at Kaggle. The large-scale dataset contains real-world e-commerce transactions with a variety of features included. Features are of different types. describing transactions, products or other useful information (such as categorical `DeviceType`). Many of the features are not described properly, so results explanation will not be so clear.
+
+
+## Paper
+
+Paper LaTex source files are available in the `paper` dircetory. The readable document in pdf format is in the following location -- [paper/main.pdf](./paper/main.pdf).
