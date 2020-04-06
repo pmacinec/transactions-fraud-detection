@@ -1,5 +1,7 @@
 from NiaPy.benchmarks import Benchmark
 
+import pandas as pd
+import numpy as np
 
 class ClassificationBenchmark(Benchmark):
     """
@@ -20,8 +22,6 @@ class ClassificationBenchmark(Benchmark):
         self.model_fn = model_fn
         self.eval_fn = eval_fn
 
-        self.columns = x_train.columns
-
         Benchmark.__init__(self, 0, 1)
 
     def get_length(self):
@@ -29,7 +29,7 @@ class ClassificationBenchmark(Benchmark):
         Get length of the vector which is being optimized.
         :return: length of the vector which is being optimized
         """
-        return len(self.columns)
+        return len(self.x_train.columns)
 
     def select_columns(self, solution_vec):
         """
@@ -37,23 +37,25 @@ class ClassificationBenchmark(Benchmark):
         :param solution_vec: current solution of the problem as a vector
         :return: list of column names based on the solution vector
         """
-        return list(self.columns[solution_vec > 0.5])
+        return self.x_train.columns[solution_vec > 0.5].tolist()
 
     def function(self):
         def evaluate(_, solution_vec):
             selected_columns = self.select_columns(solution_vec)
 
+            # fix for incorrect serialization when using multi threading module
+            if len(selected_columns) == 1 and not isinstance(selected_columns[0], str):
+                selected_columns = selected_columns[0]
+
             if len(selected_columns) < 1:
                 # return the inverted score, since the optimizer minimizes the task
-                return 1 - 1
+                return 1 - 0
 
             clf = self.model_fn()
             clf = clf.fit(self.x_train[selected_columns], self.y_train)
 
             y_pred = clf.predict(self.x_test[selected_columns])
             score = self.eval_fn(self.y_test, y_pred)
-
-            # print(len(selected_columns), score)
 
             # return the inverted score, since the optimizer minimizes the task
             return 1 - score
