@@ -47,7 +47,7 @@ class GreyWolfOptimizerMultiprocessing(GreyWolfOptimizer):
 			return i, pop, fpop
 
 		a = 2 - task.Evals * (2 / task.nFES)
-		pool = ProcessPool(nodes=4)
+		pool = ProcessPool(nodes=self.nodes)
 		pool.clear()
 		results = pool.map(eval_task, [[i, w] for i, w in enumerate(pop)])
 
