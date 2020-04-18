@@ -1,7 +1,5 @@
 from pathos.multiprocessing import ProcessPool
-
 from numpy import fabs
-
 from NiaPy.algorithms.basic import GreyWolfOptimizer
 
 
