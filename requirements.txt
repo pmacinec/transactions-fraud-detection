@@ -1,3 +1,4 @@
 missingno==0.4.2
 NiaPy==2.0.0rc10
 pathos==0.2.5
+imbalanced-learn==0.6.2
