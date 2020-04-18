@@ -3,6 +3,7 @@ __pycache__/
 .vscode
 .ipynb_checkpoints
 .env
+.venv
 data
 ieee-fraud-detection.zip
 .DS_Store
