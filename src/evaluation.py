@@ -1,4 +1,5 @@
-from sklearn.metrics import classification_report, plot_confusion_matrix, roc_auc_score
+from sklearn.metrics import classification_report, plot_confusion_matrix,\
+    roc_auc_score
 
 
 def custom_classification_report(clf, x_test, y_test):
@@ -30,9 +31,9 @@ def custom_classification_report(clf, x_test, y_test):
 
         print('\n')
 
-    print(f'\033[1mArea Under the Receiver Operating Characteristic Curve (ROC AUC)\033[0m')
-    for average in ['micro', 'macro', 'samples', 'weighted']:
-        print(f'{average}: {roc_auc_score(y_test, y_pred, average=average)}')
+    print(f'\033[1mArea Under the Receiver Operating Characteristic Curve '
+          f'(ROC AUC)\033[0m')
+    print(f'Score: {roc_auc_score(y_test, y_pred)}')
     print('\n')
 
     plot_confusion_matrix(clf, x_test, y_test)
