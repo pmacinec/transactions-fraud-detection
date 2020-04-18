@@ -14,3 +14,6 @@ ieee-fraud-detection.zip
 *.out
 *.gz
 *.fdb_latexmk
+*.bbl
+*.blg
+*.fls
