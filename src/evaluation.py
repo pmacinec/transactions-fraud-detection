@@ -2,15 +2,17 @@ from sklearn.metrics import classification_report, plot_confusion_matrix,\
     roc_auc_score
 
 
-def custom_classification_report(clf, x_test, y_test):
+def custom_classification_report(clf, x_test, y_test, **kwargs):
     """
     Create custom classification report.
 
     :param clf: classifier model.
     :param x_test: test samples to predict labels for.
     :param y_test: true label values of test samples.
+    :param confussion_matrix: wether to plut confussion matrix.
     """
     y_pred = clf.predict(x_test)
+    confussion_matrix = kwargs.get('confussion_matrix', True)
 
     clf_report = classification_report(
         y_pred,
@@ -36,4 +38,5 @@ def custom_classification_report(clf, x_test, y_test):
     print(f'Score: {roc_auc_score(y_test, y_pred)}')
     print('\n')
 
-    plot_confusion_matrix(clf, x_test, y_test)
+    if confussion_matrix:
+        plot_confusion_matrix(clf, x_test, y_test)
