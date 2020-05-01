@@ -82,12 +82,6 @@ In this paper, we propose novel method for detection frauds in transactions usin
 \section{Problem definition}
 
 
-% TODO: Odôvodnenie výberu optimalizačného algoritmu
-% TODO: Detailnejsia analýza hlavného algoritmu
-% TODO: Návrh spôsobu nastavenia parametrov
-% TODO: Návrh overenia
-
-
 % TODO: opisat nas problem
 % TODO: spomenut - nevyvazene triedy, velmi vela features, chyba domenovat znalost (features) kvoli anonymizacii
 % TODO: opisat dataset - nejaky grafy, pocty pozorovani, features
@@ -116,17 +110,24 @@ Our method will be trained and evaluated on dataset from Kaggle competition EEE-
 % Proper data analysis in combination with training machine learning models can help to prevent frauds. Problem of choosing correct features without knowing their meaning with goal to improve detection performance can be seen as optimization problem. Nature inspired algorithms are known to be very powerful for optimization problems.
 
 
+% TODO: Odôvodnenie výberu optimalizačného algoritmu
+% TODO: Detailnejsia analýza hlavného algoritmu
+% TODO: Návrh spôsobu nastavenia parametrov
+% TODO: Návrh overenia
+
 
 
 
 \section{Preparation}
 
+Before performing experiments, we preprocessed the data. At first, useless columns like id of transaction or those with too many missing values (more than 50\%) are dropped. Our preprocessing pipeline can be devided into two branches - preprocessing of numeric and categorical attributes. In numerical attributes, missing values are filled in with mean value, then all values are normalized (some machine learning algorithms are sensitive to different scales). For categorical attributes, transformation of emails to email domains has been performed, missing values have been filled with most frequent values, small categories (smaller than 5\%) merged into one \textit{other} category and at the end, all features have been one-hot encoded. Also, missing values indicators have been added to both, numerical and categorical attributes.
 
 
 % TODO: spomenut preprocessing, co sme robili a co z toho vzislo
 % TODO: spomenut transformery, one hot, a filter
 % TODO: kolko bol finalny pocet features
 % TODO: len kratko spomenut ze preco sme sa rozhodli pouzit aky model - decision tree
+% TODO: model selection phase
 
 \section{Experiments}
 
