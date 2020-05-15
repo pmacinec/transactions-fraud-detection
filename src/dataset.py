@@ -69,8 +69,8 @@ def split_and_save_processed_data(df, **kwargs):
     y_train.to_csv('../data/y_train.csv', index=False)
     x_test.to_csv('../data/x_test.csv', index=False)
     y_test.to_csv('../data/y_test.csv', index=False)
-
-
+    
+    
 def load_processed_data(**kwargs):
     """
     Load preprocessed train-test splitted data.
@@ -105,3 +105,22 @@ def load_processed_data(**kwargs):
     print(f'  y_test - {len(y_test)}')
 
     return x_train, y_train, x_test, y_test
+
+
+def shrink_data(data, n, **kwargs):
+    """
+    Shrinks the data and returns it.
+
+    :param data: dataframe or list to be shrinked.
+    :param n: the new data size.
+    :param kwargs: additional arguments:
+        random_state (int): random state for sampling from the data
+    """
+    
+    random_state = kwargs.get('random_state', None)
+    
+    if isinstance(data, list):
+        df_data = pd.DataFrame(data).sample(n=n, replace=False, random_state=random_state)
+        return df_data[0].tolist()
+    
+    return data.sample(n=n, replace=False, random_state=random_state)
