@@ -38,7 +38,7 @@ class ClassificationBenchmark(Benchmark):
         :param solution_vec: solution of the problem as a vector.
         :return: list of column names based on the solution vector.
         """
-        return self.x_train.columns[solution_vec > 0.5].tolist()
+        return self.x_train.columns[solution_vec >= 0.5].tolist()
 
     def function(self):
         def evaluate(_, solution_vec):
