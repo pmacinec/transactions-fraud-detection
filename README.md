@@ -46,3 +46,8 @@ To solve our problem of transactions fraud detection, we are using the data from
 ## Paper
 
 Paper LaTex source files are available in the `paper` dircetory. The readable document in pdf format is in the following location -- [paper/main.pdf](./paper/main.pdf).
+
+## Presentation
+
+Presentation describing whole project and results is available at [presentation.pdf](./presentation.pdf).
+
