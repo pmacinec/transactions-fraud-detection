@@ -14,6 +14,7 @@
 
 \usepackage{booktabs}
 \usepackage{subfig}
+\usepackage{svg}
 
 
 \begin{document}
@@ -97,11 +98,28 @@ Our method will be trained and evaluated on dataset from Kaggle competition EEE-
 
 \section{Method proposal}
 
-% TODO: Len kratko, co navrhujeme - feature selection na nejaky model pomocou nejakeho prirodou inspirovaneho algoritmu
+% TODO: Len kratko, co navrhujeme - feature selection na nejaky model pomocou nejakeho prirodou inspirovaneho algoritmu.
 
 % usage of nature inspired algorithm proved to optimize feature selection much better than baseline well-known methods and overperforms  using power of nature inspired algorithms to address the problem of a lot of anonymized features available in existing datasets. Combination of machine learning and nature inspired algorithms proved to be the wa
 
 % Proper data analysis in combination with training machine learning models can help to prevent frauds. Problem of choosing correct features without knowing their meaning with goal to improve detection performance can be seen as optimization problem. Nature inspired algorithms are known to be very powerful for optimization problems.
+
+We propose to use nature-inspired algorithms for feature selection. We will try several nature-inspired algorithms and compare them to find out which one is most suitable for our problem. We decided to use the following algorithms: Firefly Algorithm (FA) \cite{fister2013comprehensive}, Cuckoo Search (CS) \cite{yang2009cuckoo}, Bat Algorithm (BA) \cite{yang2010new}, Flower Pollination Algorithm (FPA) \cite{yang2012flower}, Grey Wolf Optimizer (GWO) \cite{Mirjalili_Mirjalili_Lewis_2014} since they were already used for feature selection in related works or they performed extraordinarily in other types of tasks.
+
+These algorithms will be trying to find the optimal set of features, which will be represented as a binary vector. The size of this vector will be equal to the number of features. Ones in the vector will indicate that the respective features are selected and nulls vice-versa. The nature-inspired algorithms won't be directly optimizing that binary vector, they will be optimizing vector of floats with values in $<0, 1>$ which will be later transformed to binary vector (Figure \ref{fig:projection}). The model will be fitted with the selected features from the solution vector.
+
+\begin{figure}[ht]
+	\begin{center}
+	    \includegraphics[width=6cm]{figures/projection.png}
+    \end{center}
+	\caption{Projection from the vector of floats which is being optimized by nature-inspired algorithms to the binary vector representing wether feature is selected or not.}
+	\label{fig:projection}
+\end{figure}
+
+To prevent overfitting we will do cross-validation ($k=5$) for each solution, the mean score from every one of $k$ fits will represent the fitness of the solution.
+
+% TODO: Mention which were previosly used for feature selection
+
 
 % TODO: Odôvodnenie výberu optimalizačného algoritmu
 % TODO: Detailnejsia analýza hlavného algoritmu
@@ -121,14 +139,14 @@ Before performing experiments, we preprocessed the data. At first, useless colum
 
 \section{Experiments}
 
-We did several experiemnts in which we compared the following algorithms:
+We did several experiemnts in which we compared the following algorithms with these parameters:
 
 \begin{itemize}
-	\item Firefly Algorithm \cite{fister2013comprehensive} - FA (alpha = 1, betamin = 1, gamma = 2)
-	\item Cuckoo Search \cite{yang2009cuckoo} - CS (pa = 0.2, alpha = 0.5)
-	\item Bat Algorithm \cite{yang2010new} - BA (A = 0.5, r = 0.5, Qmin = 0.0, Qmax = 2.0)
-	\item Flower Pollination Algorithm \cite{yang2012flower} - FPA (p = 0.35, beta = 1.5)
-	\item Grey Wolf Optimizer \cite{Mirjalili_Mirjalili_Lewis_2014} - GWO
+	\item Firefly Algorithm (alpha = 1, betamin = 1, gamma = 2)
+	\item Cuckoo Search (pa = 0.2, alpha = 0.5)
+	\item Bat Algorithm (A = 0.5, r = 0.5, Qmin = 0.0, Qmax = 2.0)
+	\item Flower Pollination Algorithm (p = 0.35, beta = 1.5)
+	\item Grey Wolf Optimizer
 \end{itemize}
 
 As a baseline models we have chosen the model with all features and model with selected features from \textit{recursive feature selection with cross-validation}.
