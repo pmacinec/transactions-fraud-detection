@@ -137,13 +137,13 @@ As a baseline models we have chosen the model with all features and model with s
 
 We chose a \textit{decision tree classifier} as a model on which we will try to find the optimal features. We kept the default hyper-parameters for this classifier set by scikit-learn library.
 
-Since the dataset, if pretty large, firstly we \textit{undersampled} it to achieve the equal size of both classes. Then we shrunk it again to 5\% of its size, so we would be able to make as many experiments as possible (we did not have enough computing power). We did a train/test split of 80/20.
+Since the dataset is pretty large, we firstly \textit{undersampled} it to achieve the equal size of both classes. Then we shrunk it again to 5\% of its size, so we would be able to make as many experiments as possible (since we did not have enough computing power). We did a train/test split of 80/20.
 
-For each algorithm, we tried several population sizes (10, 20, and 50), for which we did 5 runs of the algorithm. We trained exactly 50 generations. For both, recursive feature selection and feature selection using nature-inspired algorithms we did 5 fold cross-validation. We did not experiment with algorithm parameters and we used their defaults which are described in the previous section.
+For each algorithm, we tried several population sizes (10, 20, and 50), for which we did 5 runs of each algorithm. We trained exactly 50 generations. For both, recursive feature selection and feature selection using nature-inspired algorithms we did 5 fold cross-validation. We did not experiment with algorithm parameters and we used their defaults, as we mentioned in the previous section.
 
 \subsection{Results}
 
-When comparing the population sizes, all of the algorithms achieved the best results when the population size was highest (50). The only exception is Cuckoo Search, which found the most optimal solution with population size 10, however the difference negligible. Table \ref{tab:nia_comparison}. shows the algorithm scores for each population. Figure \ref{fig:nia_train_score_by_algorithm}. shows the differences in scores between population size of 10 and 50.
+When comparing the population sizes, all of the algorithms achieved the best results when the population size was highest (50). The only exception is Cuckoo Search, which found the most optimal solution with population size of 10, however the difference negligible. Table \ref{tab:nia_comparison}. shows the algorithm scores for each population. Figure \ref{fig:nia_train_score_by_algorithm}. shows the differences in scores between population size of 10 and 50.
 
 \begin{figure}
     \centering
@@ -173,7 +173,7 @@ When comparing the population sizes, all of the algorithms achieved the best res
 	\end{center}
 \end{table}
 
-All of the nature-inspired algorithms perform roughly the same, except the Grey Wolf Optimizer which outperformed the others (Figure \ref{fig:nia_train_score_by_algorithm}). These differences in results (means) between GWO and other algorithms are significant (t-test; $p-value=0.012$). Looking for the explanation, we found out that only Grey Wolf Algorithm and Bat Algorithm converged during the optimization run. Figure \ref{fig:nia_scores_by_run} shows the optimization of the Firefly Algorithm and Grey Wolf Optimizer, the difference is noticeable. If we fine-tuned the parameters of other algorithms, they might converge as well. The fact that GWO does not have any parameters (except the population size) was an advantage for it in our experiments.
+All of the nature-inspired algorithms perform roughly the same, except the Grey Wolf Optimizer which outperformed the others (Figure \ref{fig:nia_train_score_by_algorithm}). These differences in results between GWO and other algorithms are significant (there is a sigificant difference in means, t-test; $p-value=0.012$). Looking for the explanation, we found out that only Grey Wolf Algorithm and Bat Algorithm converged during the optimization run. Figure \ref{fig:nia_scores_by_run} shows the optimization progress of the Firefly Algorithm and Grey Wolf Optimizer, Firefly Algorithm did not converge. If we fine-tuned the parameters of other algorithms, they might converge as well. The fact that GWO does not have any parameters (except the population size) might be an advantage for it in our experiments.
 
 % https://towardsdatascience.com/hypothesis-testing-in-machine-learning-using-python-a0dc89e169ce
 
@@ -190,7 +190,7 @@ All of the nature-inspired algorithms perform roughly the same, except the Grey 
     \label{fig:nia_scores_by_run}
 \end{figure}
 
-The best features, selected by the optimization process, were later used to train the final model on test data. These models were compared to a model trained on all features and the model trained on features selected by recursive feature elimination.
+The best features, selected in the optimization process, were later used to train the final model on test data. These models were compared to the model trained on all features and the model trained on features selected by recursive feature elimination.
 
 The nature-inspired algorithms found a more optimal set of features on the train dataset than recursive feature elimination. However, they achieved worse results on the test dataset. The only exception is Grey Wolf Optimizer, which achieved the best train and test score. The most noticeable difference in the results is the number of selected features by algorithms. All of the algorithms (including recursive feature elimination), selected around $~110$ features, however, GWO selected only 53, this is probably the reason of its results. These results are shown in Table \ref{tab:nia_baseline_comparison}. Figure \ref{fig:nia_selected_features_by_algorithm} shows that GWO selected fewer features in general not only in its best solution.
 
