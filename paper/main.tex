@@ -97,20 +97,16 @@ Our method will be trained and evaluated on dataset from Kaggle competition EEE-
 
 \section{Method proposal}
 
-% TODO: len kratko, co navrhujeme - feature selection na nejaky model pomocou nejakeho prirodou inspirovaneho algoritmu
-% TODO: mozeno spomenut oversampling/undersampling
-
+% TODO: Len kratko, co navrhujeme - feature selection na nejaky model pomocou nejakeho prirodou inspirovaneho algoritmu
 
 % usage of nature inspired algorithm proved to optimize feature selection much better than baseline well-known methods and overperforms  using power of nature inspired algorithms to address the problem of a lot of anonymized features available in existing datasets. Combination of machine learning and nature inspired algorithms proved to be the wa
 
 % Proper data analysis in combination with training machine learning models can help to prevent frauds. Problem of choosing correct features without knowing their meaning with goal to improve detection performance can be seen as optimization problem. Nature inspired algorithms are known to be very powerful for optimization problems.
 
-
 % TODO: Odôvodnenie výberu optimalizačného algoritmu
 % TODO: Detailnejsia analýza hlavného algoritmu
 % TODO: Návrh spôsobu nastavenia parametrov
 % TODO: Návrh overenia
-
 
 \section{Preparation}
 
@@ -225,19 +221,15 @@ The nature-inspired algorithms found a more optimal set of features on the train
 	\label{fig:nia_selected_features_by_algorithm}
 \end{figure}
 
-% TODO: ake experiemnty sme spravili
-% TODO: tabulka porovnania algoritmov
-% TODO: learning along the way with consequences - napr undersampling/oversampling atd.
-
 \section{Conclusion}
-
-% TODO: zhrnutie vysledkov, mozne vylepsenia a uskalia nasho pristupu
 
 In our experiments, we found out Grey Wolf Optimizer as the best nature-inspired algorithm for feature selection. It achieved significantly better results than other nature-inspired algorithms and better results that recursive feature elimination.
 
 GWO alongside Bat Algorithm was the only nature-inspired algorithms that were able to converge during the optimization process. We assume that other algorithms might converge too if we experimented with their parameter settings. We consider the fact, that GWO does not have any parameters other than population size as a big strength, because it saves a significant amount of optimization time.
 
 In comparison with traditional ways of feature selection (recursive feature elimination), all of the nature-inspired algorithms were able to find better solutions on the training dataset, however, they overfit most of the time. Moreover, the feature selection using nature-inspired algorithms was much slower.
+
+% TODO: concusion in the topic of transaction fraud detection
 
 \bibliographystyle{splncs04}
 \bibliography{references}
