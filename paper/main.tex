@@ -181,11 +181,12 @@ When comparing the population sizes, all of the algorithms achieved the best res
     \label{fig:nia_train_score_by_algorithm}
 \end{figure}
 
+\def\arraystretch{1.5}
 \begin{table}[]
 	\begin{center}
-		\begin{tabular}{|l|rrrrr|}
+		\begin{tabular}{|l|r|r|r|r|r|}
 			\hline
-			\textbf{Population size \textbackslash Score} & \multicolumn{1}{l}{\textbf{FA}} & \multicolumn{1}{l}{\textbf{CS}} & \multicolumn{1}{l}{\textbf{BA}} & \multicolumn{1}{l}{\textbf{FPA}} & \multicolumn{1}{l|}{\textbf{GWO}} \\ \hline
+			\textbf{Population size \textbackslash Score} & \multicolumn{1}{l|}{\textbf{FA}} & \multicolumn{1}{l|}{\textbf{CS}} & \multicolumn{1}{l|}{\textbf{BA}} & \multicolumn{1}{l|}{\textbf{FPA}} & \multicolumn{1}{l|}{\textbf{GWO}} \\ \hline
 			\textbf{10}                                             & 0.753                           & \textbf{0.752}                           & 0.759                           & 0.754                            & 0.776                             \\
 			\textbf{20}                                             & 0.757                           & 0.746                           & 0.755                           & 0.750                            & 0.771                             \\
 			\textbf{50}                                             & \textbf{0.761}                           & 0.751                           & \textbf{0.761}                           & \textbf{0.756}                            & \textbf{0.782}                             \\ \hline
@@ -219,7 +220,7 @@ The nature-inspired algorithms found a more optimal set of features on the train
 
 \begin{table}[]
 	\begin{center}
-		\begin{tabular}{|lrrr|}
+		\begin{tabular}{|l|r|r|r|}
 			\hline
 			\textbf{Feature selection type} & \textbf{Train score} & \textbf{Test score} & \textbf{Selected features} \\ \hline
 			All features                    & N/A                  & 0.713               & 240                                  \\
@@ -238,7 +239,7 @@ The nature-inspired algorithms found a more optimal set of features on the train
 
 \begin{figure}[ht]
 	\begin{center}
-	    \includegraphics[width=5.5cm]{figures/nia_selected_features_by_algorithm.png}
+	    \includegraphics[width=7.5cm]{figures/nia_selected_features_by_algorithm.png}
     \end{center}
 	\caption{Number of selected features by algorithm - Grey Wolf Algorithm selected by far the least number of features.}
 	\label{fig:nia_selected_features_by_algorithm}
