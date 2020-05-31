@@ -184,20 +184,21 @@ When comparing the population sizes, all of the algorithms achieved the best res
 \begin{figure}
     \centering
     \includegraphics[width=11cm]{figures/nia_train_score_by_algorithm_10}
-    \caption{Scores of the nature-inspired in 5 runs algorithms for population size of 10.}
+    \caption{Scores of the nature-inspired algorithms in 5 runs - population size of 10.}
     \label{fig:nia_train_score_by_algorithm_1}
 \end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[width=11cm]{figures/nia_train_score_by_algorithm_50}
-    \caption{Scores of the nature-inspired algorithms in 5 runs for population size of 50.}
+    \caption{Scores of the nature-inspired algorithms in 5 runs - population size of 50.}
     \label{fig:nia_train_score_by_algorithm_2}
 \end{figure}
 
 
 \def\arraystretch{1.5}
 \begin{table}
+	\vspace*{0.5cm}
 	\begin{center}
 		\caption{Highest train scores (ROC AUC) of nature inspired algorithms by population size. We may notice that Grey Wolf Algorithm (GWO) outperformed all of the other algorithms.} \label{tab:nia_comparison}
 	\end{center}
@@ -212,7 +213,7 @@ When comparing the population sizes, all of the algorithms achieved the best res
 	\end{center}
 \end{table}
 
-All of the nature-inspired algorithms perform roughly the same, except the Grey Wolf Optimizer which outperformed the others (Figure \ref{fig:nia_train_score_by_algorithm}). These differences in results between GWO and other algorithms are significant (there is a sigificant difference in means, t-test; $p-value=0.012$). Looking for the explanation, we found out that only Grey Wolf Algorithm and Bat Algorithm converged during the optimization run. Figure \ref{fig:nia_scores_by_run_1}. \& \ref{fig:nia_scores_by_run_2}. shows the optimization progress of the Firefly Algorithm and Grey Wolf Optimizer, Firefly Algorithm did not converge. If we fine-tuned the parameters of other algorithms, they might converge as well. The fact that GWO does not have any parameters (except the population size) might be an advantage for it in our experiments.
+All of the nature-inspired algorithms perform roughly the same, except the Grey Wolf Optimizer which outperformed the others (Figure \ref{fig:nia_train_score_by_algorithm_1} \& \ref{fig:nia_train_score_by_algorithm_2}). These differences in results between GWO and other algorithms are significant (there is a sigificant difference in means, t-test; $p-value=0.012$). Looking for the explanation, we found out that only Grey Wolf Algorithm and Bat Algorithm converged during the optimization run. Figure \ref{fig:nia_scores_by_run_1}. \& \ref{fig:nia_scores_by_run_2}. shows the optimization progress of the Firefly Algorithm and Grey Wolf Optimizer, Firefly Algorithm did not converge. If we fine-tuned the parameters of other algorithms, they might converge as well. The fact that GWO does not have any parameters (except the population size) might be an advantage for it in our experiments.
 
 % https://towardsdatascience.com/hypothesis-testing-in-machine-learning-using-python-a0dc89e169ce
 
@@ -254,6 +255,7 @@ The nature-inspired algorithms found a more optimal set of features on the train
 \end{table}
 
 \begin{figure}[h!]
+	\vspace*{1cm}
 	\begin{center}
 	    \includegraphics[width=10cm]{figures/nia_selected_features_by_algorithm.png}
     \end{center}
